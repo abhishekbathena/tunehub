@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ <div th:each="song:${song}" class="music-card">
+      
+        <div class="music-info" >
+            <h2 th:text="${song.name}"></h2>
+            <p th:text="${song.artist}"></p>
+        </div>
+        <audio controls>
+            <source  th:src="${song.link}"  type="audio/mpeg">
+           
+        </audio>
+ </div>
+</body>
+</html>
