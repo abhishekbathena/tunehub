@@ -148,6 +148,53 @@ nav ul li a:hover {
     display: none;
   }
 }
+
+  .b2 {
+            font-family: "Roboto", sans-serif;
+            background: linear-gradient(to right, #3498db, #2c3e50); /* Adjust colors as needed */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .form-section {
+            display: flex;
+            justify-content: center;
+        }
+
+        .login-box {
+            width: 100%;
+        }
+
+        .ele {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .clkbtn {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 </style>
 </head>
 <body>
@@ -194,36 +241,25 @@ nav ul li a:hover {
       </ul>
     </div>
 	
+	
+	<div class="b2">
 	<form action="addsong" method="post">
-     <div class="container">
-     <div style="text-align:center">ADD SONG</div>
-     
-        <div class="form-section">
- 
-            <!-- login form -->
-            <div class="login-box">
-                <input type="text"
-                       class="email ele"
-                       name="name"
-                       placeholder="Enter song name">
-                <input type="text"
-                       class="email ele"
-                       name="artist"
-                       placeholder="Artist name">
-                <input type="text"
-                       class="email ele"
-                       name="genre"
-                       placeholder="Genre">
-                <input type="text"
-                       class="email ele"
-                       name="link"
-                       placeholder="Provide Link">
-                <input type='submit' class="clkbtn" value="ADD SONG"></input>
+        <div class="container">
+            <div style="text-align: center">ADD SONG</div>
+
+            <div class="form-section">
+                <div class="login-box">
+                    <input type="text" class="ele" name="name" placeholder="Enter song name">
+                    <input type="text" class="ele" name="artist" placeholder="Artist name">
+                    <input type="text" class="ele" name="genre" placeholder="Genre">
+                    <input type="text" class="ele" name="link" placeholder="Provide Link">
+                    <input type='submit' class="clkbtn" value="ADD SONG">
+                </div>
             </div>
-           
         </div>
-    </div>
     </form>
+	</div>
+	
   <script>
  const mobileNav = document.querySelector(".hamburger");
   const navbar = document.querySelector(".menubar");

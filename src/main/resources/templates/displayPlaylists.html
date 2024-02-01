@@ -148,7 +148,46 @@ nav ul li a:hover {
     display: none;
   }
 }
+   .b2 {
+            font-family: "Roboto", sans-serif;
+            background: linear-gradient(to right, #3498db, #2c3e50); /* Adjust colors as needed */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
+        .playlist-container {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .playlist-dropdown {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
 </style>
 </head>
 <body>
@@ -195,29 +234,62 @@ nav ul li a:hover {
       </ul>
     </div>
 
- <table border>
- 	<thead>
- 		<tr>
- 			<th>Name</th>
- 			<th>Song</th>
- 		</tr>
- 	</thead>
- 	<tbody>
- 		<tr th:each="plist:${allPlaylists}">
-	 		<td th:text="${plist.name}"></td>
-	 		<td>
-	 		 	<ul>
-	 		 		<li th:each="song:${plist.songs}">
-	 		 			<span th:text="${song.name}"></span>
-	 		 			<span th:text="${song.link}"></span>
-	 		 		</li>
-	 		 	</ul>
-	 		</td>
+ <div class="b2">
+    <div class="playlist-container">
+        <label for="playlist" style="font-weight: bold;">Select Playlist:</label>
+        <select id="playlist" class="playlist-dropdown">
+            <option value="" disabled selected>Select Playlist</option>
+            <option th:each="plist : ${allPlaylists}" th:value="${plist.id}" th:text="${plist.name}"></option>
+        </select>
 
- 		</tr>
- 	</tbody>
- 	
- </table>
+        <ul id="songList">
+            <!-- Songs for the selected playlist will be dynamically added here -->
+        </ul>
+    </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        // Sample data for songs in each playlist
+        var playlistSongs = {
+            /*[# th:each="plist : ${allPlaylists}"]*/
+            [[${plist.id}]]: [
+                /*[# th:each="song : ${plist.songs}"]*/
+                { name: '[[${song.name}]]', link: '[[${song.link}]]' },
+                /*[/]*/
+            ],
+            /*[/]*/
+        };
+
+        var playlistDropdown = document.getElementById('playlist');
+        var songList = document.getElementById('songList');
+
+        // Event listener for dropdown change
+        playlistDropdown.addEventListener('change', function (event) {
+            var selectedPlaylist = event.target.value;
+            populateSongList(selectedPlaylist);
+        });
+
+        // Function to populate the song list based on the selected playlist
+        function populateSongList(selectedPlaylist) {
+            // Clear existing song list
+            songList.innerHTML = '';
+
+            // Retrieve songs for the selected playlist
+            var songs = playlistSongs[selectedPlaylist];
+
+            // Append songs to the list
+            songs.forEach(function (song) {
+                var li = document.createElement('li');
+                li.innerHTML = '<span>' + song.name + '</span><span>' + song.link + '</span>';
+                songList.appendChild(li);
+            });
+        }
+
+        // Initial population of song list based on default playlist
+        populateSongList(playlistDropdown.value);
+        /*]]>*/
+    </script>
+</div>
  
  <script>
  const mobileNav = document.querySelector(".hamburger");
